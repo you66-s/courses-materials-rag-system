@@ -5,11 +5,15 @@ class VectorDataBase:
     def __init__(self, collection_name: str):
         try:
             dotenv.load_dotenv()
-            self.__client = chromadb.CloudClient(
-                api_key=os.getenv("CHROMA_DB_API_KEY"),
-                tenant=os.getenv("CHROMA_DB_TENANT"),
-                database=os.getenv("CHROMA_DB_NAME")
-            )
+            try:    
+                self.__client = chromadb.CloudClient(
+                    api_key=os.getenv("CHROMA_DB_API_KEY"),
+                    tenant=os.getenv("CHROMA_DB_TENANT"),
+                    database=os.getenv("CHROMA_DB_NAME")
+                )
+            except Exception as e:
+                print(f"Error creating ChromaDB CloudClient: {e}")
+                raise
             self.__collection = self.__client.get_or_create_collection(name=collection_name)
             print(f"ChromaDB client initialized and collection '{collection_name}' ready.")
             print(f"collection documents count: {self.__collection.count()}")
