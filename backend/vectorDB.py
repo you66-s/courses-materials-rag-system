@@ -29,3 +29,9 @@ class VectorDataBase:
         except Exception as e:
             print(f"Error adding document with ID '{id}': {e}")
             raise
+        
+    def query_db(self, query_embedding: list[float], top_k: int) -> dict:
+        return self.__collection.query(
+            query_embeddings=query_embedding,
+            n_results=top_k
+        )
