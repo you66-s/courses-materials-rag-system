@@ -1,5 +1,5 @@
-from embeddings_model import EmbeddingsModel
-from vectorDB import VectorDataBase
+from backend.embeddings_model import EmbeddingsModel
+from backend.vectorDB import VectorDataBase
 
 class Retriever:
     def __init__(self, collection_name: str = "course_materials"):
