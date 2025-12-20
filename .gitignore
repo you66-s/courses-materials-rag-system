@@ -1,3 +1,4 @@
 /data
 /testing
 .env
+/UI/chroma_db
